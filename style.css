@@ -119,3 +119,38 @@ li a{
     font-weight: bolder;
     color: #5c2cc9;
 }
+.content{
+    width: 80%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.line{
+    
+}
+.context-text{
+    width: 50%;
+    color: #fff;
+    font-size: larger;
+}
+.search{
+    width: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 10px;
+}   
+
+input[type="text"]{
+    width: 40%;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    outline: none;
+}
