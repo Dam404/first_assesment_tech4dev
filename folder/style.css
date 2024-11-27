@@ -89,7 +89,6 @@ li a{
     margin-top: 40px;
     width: 80%;
     margin: auto;
-    top: 80%;
     display: inline-flexbox;
 }
 .text{
@@ -137,7 +136,6 @@ li a{
 .context-text{
     width: 50%;
     color: #fff;
-    font-size: larger;
 }
 .search{
     width: 40%;
