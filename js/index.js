@@ -1,65 +1,74 @@
-// Create 2 classes, first class ProductService, second class Product;
- class Product{
-    constructor(category, description, id, image, price, rating, title){
-        this.category = category;
-        this.description = description;
-        this.id = id;
-        this.image = image;
-        this.price = price;
-        this.rating = rating;
-        this.title = title;
+
+class Product {
+    constructor(id, title, price, description, category, image, rating) {
+      this.id = id;
+      this.title = title;
+      this.price = price;
+      this.description = description;
+      this.category = category;
+      this.image = image;
+      this.rating = rating;
     }
- }
-
-    class ProductService{
-        constructor(){
-            this.url = "https://fakestoreapi.com/products";
-        }
-
-        async fetchProducts(){
-            const response = await fetch(this.url);
-            const data = await response.json();
-            return data;
-        }
-
-        async getProducts(){
-            const products = await this.fetchProducts();
-            return products;
-        }
-
-        async getProductById(id){
-            const products = await this.fetchProducts();
-            return products.find(product => product.id === id);
-        }
-
-        async deleteProduct(id){
-            const products = await this.fetchProducts();
-            const updatedProducts = products.filter(product => product.id !== id);
-            return updatedProducts;
-        }
-
-        async addProduct(product){
-            const products = await this.fetchProducts();
-            products.push(product);
-            return products;
-        }
+  }
+  
+ 
+  class ProductService {
+    constructor(apiUrl) {
+      this.apiUrl = apiUrl;
     }
+  
+  
+    async #fetchData(endpointData, optionsProvided = {}) {
+      try {
+        const responseExpected = await fetch(`${this.apiUrl}${endpointData}`, optionsProvided);
+        if (!responseExpected.ok) {
+          throw console.error(`Error: ${responseExpected.statusText}`);
+        }
+        return await responseExpected.json();
+      } catch (error) {
+        console.error('Fetch error:', error);
+      }
+    }
+  
+    
+    async getProducts() {
+      return await this.#fetchData('/products');
+      };
+  
+   
+    async getProductById(id) {
+      return await this.#fetchData(`/products/${id}`), {
+        method: 'GET'
+      };
+    }
+  
+   
+    async deleteProduct(id) {
+      return await this.#fetchData(`/products/${id}`, {
+        method: 'DELETE'
+      });
+    }
+  }
 
-    const productService = new ProductService();
-    productService.getProducts().then(products => console.log(products));
-    productService.getProductById(1).then(product => console.log(product));
-    productService.deleteProduct(1).then(products => console.log(products));
-    productService.addProduct(new Product).then(products => console.log(products));
-
-
-// First class should have a private method that uses fetch to hit any endpoint.
+    const productService = new ProductService('https://fakestoreapi.com');
+    productService.getProducts().then((products) => console.log(products));
+    productService.getProductById(1).then((product) => console.log(product));
+    productService.deleteProduct(1).then((product) => console.log(product));
+    
+  
+    // Create 2 classes, first class ProductService, second class Product;
  
-// Create 4 methods in the ProductService
-// getProducts() - Gets all the products and returns it;
-// getProductById() - Gets products by id;
-// deleteProduct()
-// addProduct()
- 
+    // First class should have a private method that uses fetch to hit any endpoint.
+     
+    // Second class should have a constructor that takes in the following parameters:
+    // category, description, id, image, price, rating, title
+
+    // Create 3 methods in the ProductService
+    // getProducts() - Gets all the products and returns it;
+    // getProductById() - Gets products by id;
+    // deleteProduct()
+     
+    // https://fakestoreapi.com/
 // https://fakestoreapi.com/
  
 // schema - how a product should look.
