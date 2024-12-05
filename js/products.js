@@ -42,9 +42,9 @@ class ProductService {
 
 const productService = new ProductService();
 
-productService.fetchAllProducts().then(products => {
-  console.log('Fetched products:', products);
-  });
+// productService.fetchAllProducts().then(products => {
+//   console.log('Fetched products:', products);
+//   });
 
 
 export { ProductService, Product}
